@@ -1,7 +1,7 @@
 .navbar-lewagon {
   justify-content: space-between;
   background-color: white;
-  height: 60px;
+  // height: 60px;
   border-bottom: 3px solid $blue;
 }
 
@@ -26,4 +26,7 @@
   color: $dark-green;
 }
 
+.navbar-brand {
+  margin-right: 0px !important;
+}
 
