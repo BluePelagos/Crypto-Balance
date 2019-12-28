@@ -11,8 +11,8 @@
   text-align: center;
   padding: 5px 0;
   /* border: 2px solid #666692; */
-  width: 400px;
-  margin: 0 auto;
+  // width: 400px;
+  // margin: 0 auto;
   color: #ffffffb0;
 }
 
@@ -26,6 +26,7 @@
   text-transform: uppercase;
   margin-bottom: 4px;
   position: relative;
+  text-align: center;
 }
 
 .chart-holder {
@@ -43,7 +44,7 @@
 .trigger {
   width: 100px;
   border-radius: 25px;
-  margin: 8px;
+  margin: 4px;
   text-align: center;
 }
 
@@ -56,8 +57,8 @@
 #guide {
   background-color: #ccecca6b;
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: 0px;
+  right: 0px;
   color: #ffffffd6;
   border: 1px solid #ffffff82;
 }

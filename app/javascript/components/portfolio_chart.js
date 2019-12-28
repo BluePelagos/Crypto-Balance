@@ -1,4 +1,5 @@
 
+
 function loadChart(){
 
 
@@ -46,8 +47,8 @@ google.charts.setOnLoadCallback(drawChart);
     var options = {
       'title':'Portfolio Positions',
 
-      height: 400,
-      width: '100%',
+      // height: '400px',
+      // width: '100%',
 
       'chartArea': {left:0, top:0, width:'100%', height:'100%'},
       'legend' : {position: 'bottom'},
@@ -59,6 +60,11 @@ google.charts.setOnLoadCallback(drawChart);
     var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
     chart.draw(data, options);
   };
+
+  $(window).resize(function() {
+    drawChart();
+  });
+
 }
 
 export {loadChart}

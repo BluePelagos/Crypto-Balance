@@ -2,10 +2,10 @@
 <!-- Header Component -->
 
 <div class="header container-fluid border-bottom">
-  <div class="row">
-    <div class="col">
-      <div class="price-container text-center justify-content-center">
-        <button id="guide">Help?</button>
+  <div>
+    <div>
+      <div class="price-container">
+        <button id="guide">?</button>
         <% price_btc = Coin.find_by(symbol: 'BTC').price_usdt %>
         <% value_yesterday = 0.0 %>
         <% Coin.all.each do |coin| %>
@@ -13,15 +13,21 @@
           <% value_yesterday += position_yesterday.first[:value_usdt] unless position_yesterday.first.nil? %>
         <% end %>
 
-        <h5>Portfolio Value</h5>
+        <h5 class="mt-1">Portfolio Value</h5>
         <% current_value = @portfolio.current_value_btc.to_f * price_btc %>
         <% gain_loss = value_yesterday == 0.0 ? 0.0 : (100*(current_value - value_yesterday) / value_yesterday).round(2) %>
 
         <span class="display-4"><%= number_to_currency(current_value) %></span>
         <p class="<%= gain_loss > 0 ? 'text-success' : 'text-danger' %>"><%= gain_loss > 0 ? '+' : '-' %><%= gain_loss %>%</p>
+    
+        <%= link_to create_positions_path(@portfolio), class:"refresh" do %>
+          <i class="refresh helper6 fas fa-sync-alt"></i>
+        <% end %>
+
       </div>
     </div>
   </div>
+
 
   <div class="d-flex justify-content-center">
     <%= form_tag rebalance_positions_path(@portfolio), :id => 'rebalance-btn' do %>
@@ -30,15 +36,12 @@
     <%= form_tag all_btc_path(@portfolio), :id => 'all-btc-btn' do %>
       <button class="btn trigger helper5 btn-info" id="all-btc-btn"> All BTC</button>
     <% end %>
-    <%= link_to create_positions_path(@portfolio), class:"refresh" do %>
-      <i class="refresh helper6 fas fa-sync-alt"></i>
-    <% end %>
     <%= form_tag sell_positions_path(@portfolio), :id => 'sell' do %>
       <button class="helper7 btn trigger btn-danger" id="sell-btn"> Panic Sell</button>
     <% end %>
   </div>
-  <div class="next">Next Rebalance: <%= @portfolio.next_rebalance_dt.strftime("%A  #{@portfolio.next_rebalance_dt.day.ordinalize} %B") %>
 
+  <div class="next">Next Rebalance: <%= @portfolio.next_rebalance_dt.strftime("%A  #{@portfolio.next_rebalance_dt.day.ordinalize} %B") %>
   </div>
 </div>
 
@@ -53,12 +56,11 @@
     <div class="col-md-6 text-center pt-3">
       <!-- charts -->
       <div class="chart-holder">
-        <div id="chart_div"></div>
+        <div id="chart_div" style="width: 100%; height: 400px"></div>
       </div>
     </div>
   </div>
 </div>
-
 
 
 
@@ -71,4 +73,6 @@
   var coins = JSON.parse(json_coins);
   var priceChanges = [];
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
