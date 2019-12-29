@@ -23,13 +23,15 @@ class Portfolio < ApplicationRecord
     self.current_value_btc = 0.0
 
     positions.each do |position|
-      coin = Coin.find_by(symbol: position[:asset])
-      unless coin.nil?
-        current_latest_position_record = Position.find_by(coin_id: coin.id, portfolio: self, as_of_dt_end: nil)
-        new_position_record = create_new_position_record(coin, position)
-        close_prior_position_record(current_latest_position_record, new_position_record)
-        self.current_value_usdt += new_position_record.value_usdt # this value and the value below don't match on the dash board total
-        self.current_value_btc += new_position_record.value_btc # read line above and investigate
+      unless position.nil?
+        coin = Coin.find_by(symbol: position[:asset])
+        unless coin.nil?
+          current_latest_position_record = Position.find_by(coin_id: coin.id, portfolio: self, as_of_dt_end: nil)
+          new_position_record = create_new_position_record(coin, position)
+          close_prior_position_record(current_latest_position_record, new_position_record)
+          self.current_value_usdt += new_position_record.value_usdt # this value and the value below don't match on the dash board total
+          self.current_value_btc += new_position_record.value_btc # read line above and investigate
+        end
       end
     end
 
