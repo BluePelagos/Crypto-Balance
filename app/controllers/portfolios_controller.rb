@@ -78,9 +78,11 @@ class PortfoliosController < ApplicationController
 
   def get_total_percent
     sum = 0
-    @positions.each do |p|
-      coin = p.coin
-      sum += ((p.quantity * coin.price_usdt)/@usdt_total) * 100
+    unless @usdt_total.nil? || @usdt_total == 0.0
+      @positions.each do |p|
+        coin = p.coin
+        sum += ((p.quantity * coin.price_usdt)/@usdt_total) * 100
+      end
     end
     return sum.round
   end
