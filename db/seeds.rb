@@ -19,14 +19,14 @@ Portfolio.destroy_all
 User.destroy_all
 Coin.destroy_all
 
-puts 'creating test user'
+# puts 'creating test user'
 
-User.create(
-  first_name: 'Testing',
-  last_name: 'Tester',
-  email: 'test@testing.com',
-  password: 'secret'
-)
+# User.create(
+#   first_name: 'Testing',
+#   last_name: 'Tester',
+#   email: 'test@testing.com',
+#   password: 'secret'
+# )
 
 puts 'Creating coins'
 
